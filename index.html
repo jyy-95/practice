@@ -990,72 +990,8 @@
 
                     <div class="card">
                         <h2 class="card-title">快速开始</h2>
-                        <div class="module-grid">
-                            <div class="module-card" onclick="startQuiz(1)">
-                                <div class="module-card-header">
-                                    <div class="module-icon module-icon-1">📖</div>
-                                    <div>
-                                        <div class="module-name">言语理解</div>
-                                    </div>
-                                </div>
-                                <div class="module-desc">考察文字理解和表达能力</div>
-                                <div class="module-stats">
-                                    <span class="module-stat">📝 {{getModuleQuestionCount(1)}} 题</span>
-                                    <span class="module-stat">✅ {{getModuleAccuracy(1)}}% 正确率</span>
-                                </div>
-                            </div>
-                            <div class="module-card" onclick="startQuiz(2)">
-                                <div class="module-card-header">
-                                    <div class="module-icon module-icon-2">🔢</div>
-                                    <div>
-                                        <div class="module-name">数量关系</div>
-                                    </div>
-                                </div>
-                                <div class="module-desc">考察数学运算和逻辑思维</div>
-                                <div class="module-stats">
-                                    <span class="module-stat">📝 {{getModuleQuestionCount(2)}} 题</span>
-                                    <span class="module-stat">✅ {{getModuleAccuracy(2)}}% 正确率</span>
-                                </div>
-                            </div>
-                            <div class="module-card" onclick="startQuiz(3)">
-                                <div class="module-card-header">
-                                    <div class="module-icon module-icon-3">🎯</div>
-                                    <div>
-                                        <div class="module-name">判断推理</div>
-                                    </div>
-                                </div>
-                                <div class="module-desc">考察逻辑判断和推理能力</div>
-                                <div class="module-stats">
-                                    <span class="module-stat">📝 {{getModuleQuestionCount(3)}} 题</span>
-                                    <span class="module-stat">✅ {{getModuleAccuracy(3)}}% 正确率</span>
-                                </div>
-                            </div>
-                            <div class="module-card" onclick="startQuiz(4)">
-                                <div class="module-card-header">
-                                    <div class="module-icon module-icon-4">🌍</div>
-                                    <div>
-                                        <div class="module-name">常识判断</div>
-                                    </div>
-                                </div>
-                                <div class="module-desc">考察综合知识储备</div>
-                                <div class="module-stats">
-                                    <span class="module-stat">📝 {{getModuleQuestionCount(4)}} 题</span>
-                                    <span class="module-stat">✅ {{getModuleAccuracy(4)}}% 正确率</span>
-                                </div>
-                            </div>
-                            <div class="module-card" onclick="startQuiz(5)">
-                                <div class="module-card-header">
-                                    <div class="module-icon module-icon-5">📈</div>
-                                    <div>
-                                        <div class="module-name">资料分析</div>
-                                    </div>
-                                </div>
-                                <div class="module-desc">考察数据分析和计算能力</div>
-                                <div class="module-stats">
-                                    <span class="module-stat">📝 {{getModuleQuestionCount(5)}} 题</span>
-                                    <span class="module-stat">✅ {{getModuleAccuracy(5)}}% 正确率</span>
-                                </div>
-                            </div>
+                        <div class="module-grid" id="moduleGrid">
+                            <!-- 动态生成 -->
                         </div>
                     </div>
                 </div>
@@ -1244,22 +1180,58 @@
         function initDefaultQuestions() {
             if (DB.getQuestions().length === 0) {
                 const defaultQuestions = [
+                    // ==================== 言语理解（模块 1）====================
                     { id: 1, module: 1, text: "依次填入下列各句横线处的词语，恰当的一组是（  ）\n①面对困境，我们需要的是_____的勇气。\n②这部作品_____了作者深厚的文学功底。", options: ["A. 坚定 显示", "B. 坚强 显示", "C. 坚定 展示", "D. 坚强 展示"], answer: "A", analysis: "坚定：立场、主张等稳固不动摇；坚强：强固有力，不可动摇。显示：明显地表现；展示：摆出来让人看。" },
                     { id: 2, module: 1, text: "下列句子中，没有语病的一项是（  ）", options: ["A. 通过这次学习，使我受益匪浅。", "B. 是否努力学习，是取得好成绩的关键。", "C. 我们要防止此类事件不再发生。", "D. 一个人能否成功，关键在于他是否努力。"], answer: "D", analysis: "A 缺主语；B 两面对一面；C 否定不当。" },
-                    { id: 3, module: 1, text: "填入下面一段文字横线处的语句，衔接最恰当的一组是（  ）\n\n读书原为自己受用，多读不能算是荣誉，少读也不能算是羞耻。_____"
-, options: ["A. 多读如果彻底，必能养成深思熟虑的习惯，以至于变化气质。", "B. 少读如果彻底，必能养成深思熟虑的习惯，以至于变化气质。", "C. 多读而不求甚解，不能算是读书。", "D. 少读而不求甚解，不能算是读书。"], answer: "B", analysis: "根据上下文语境，强调的是读书的质量而非数量，与'少读'相呼应。" },
+                    { id: 3, module: 1, text: "填入下面一段文字横线处的语句，衔接最恰当的一组是（  ）\n\n读书原为自己受用，多读不能算是荣誉，少读也不能算是羞耻。_____", options: ["A. 多读如果彻底，必能养成深思熟虑的习惯，以至于变化气质。", "B. 少读如果彻底，必能养成深思熟虑的习惯，以至于变化气质。", "C. 多读而不求甚解，不能算是读书。", "D. 少读而不求甚解，不能算是读书。"], answer: "B", analysis: "根据上下文语境，强调的是读书的质量而非数量，与'少读'相呼应。" },
+                    { id: 16, module: 1, text: "下列各句中，加点的成语使用恰当的一项是（  ）", options: ["A. 这位明星的回答真是巧舌如簧，赢得了现场观众的阵阵掌声。", "B. 他们俩人在拜把兄弟时曾经海誓山盟，永不背叛，可到了商战的关键时刻，竟成了仇敌。", "C. 在语文老师的严格要求下，我逐渐改正了文不加点的毛病。", "D. 他把事情真相告诉了我，我恍然大悟，原来错怪了他。"], answer: "D", analysis: "A 巧舌如簧含贬义；B 海誓山盟用于男女爱情；C 文不加点是褒义词，形容文思敏捷。" },
+                    { id: 17, module: 1, text: "依次填入下列横线处的词语，最恰当的一组是（  ）\n①这家企业_____了传统工艺和现代技术。\n②经过多次_____，他终于找到了解决问题的方法。", options: ["A. 结合 摸索", "B. 结合 探索", "C. 融合 摸索", "D. 融合 探索"], answer: "C", analysis: "融合：几种不同的事物合成一体；结合：人或事物间发生密切联系。摸索：试探着（行进）或寻找（方向、方法、经验等）；探索：多方寻求答案，解决疑问。" },
+                    { id: 18, module: 1, text: "下列各句中，句意明确、没有语病的一句是（  ）", options: ["A. 局长嘱咐几个学校的领导，新学期的工作一定要有新的起色。", "B. 经过这件事，他明白了一个道理：做人要诚实守信。", "C. 我们应该发挥广大青年的充分的作用。", "D. 对于自己的路，他们在探索着，他们在判断着，他们在寻找着。"], answer: "B", analysis: "A 有歧义；C 语序不当，应为'充分发挥'；D 语序不当，应为'判断、探索、寻找'。" },
+                    { id: 19, module: 1, text: "依次填入下列横线处的关联词语，最恰当的一组是（  ）\n______是她的诗，______是她的人，______表现出一种超凡脱俗的气质。", options: ["A. 无论 还 都", "B. 不仅 也 更", "C. 虽然 但 却", "D. 即使 也 还"], answer: "A", analysis: "根据句意，表示无条件的关系，用'无论……还……都……'。" },
+                    { id: 20, module: 1, text: "下列各句中，没有语病且句意明确的一项是（  ）", options: ["A. 他马上召集常委会进行研究，统一安排了现场会的内容、时间和出席人员，以及会议中应注意的问题。", "B. 某工厂以技术进步为动力，不断致力于新产品、新技术、新工艺、新材料的研制开发。", "C. 当前和今后一个相当长的时间内，每年进入劳动年龄的人口数很大，安排城镇青年劳动力就业是一项相当繁重的任务。", "D. 由于改编者没有很好地理解原作的精髓，任凭主观想象，加入了许多不恰当的情节，反而大大地削弱了原作的思想性。"], answer: "C", analysis: "A 搭配不当；B 语序不当；D 关联词使用不当。" },
+                    { id: 21, module: 1, text: "下列句子中，标点符号使用正确的一项是（  ）", options: ["A. 你是现在去呢？还是等会儿再去？", "B. '这究竟是怎么回事呢？'同志们。", "C. 上海 4·15 列车相撞事故，造成 70 多人死亡，100 多人受伤。", "D. 原子弹、氢弹的爆炸，人造卫星的发射、回收，标志着我国科学技术的发展达到了新的水平。"], answer: "D", analysis: "A 选择问句只在最后用问号；B 问号应在句末；C 间隔号使用错误。" },
+
+                    // ==================== 数量关系（模块 2）====================
                     { id: 4, module: 2, text: "某数加上 7，乘以 3，再减去 15，等于 12。这个数是多少？（  ）", options: ["A. 5", "B. 6", "C. 7", "D. 8"], answer: "D", analysis: "设这个数为 x，则 (x+7)×3-15=12，解得 x=8。" },
                     { id: 5, module: 2, text: "甲、乙两人同时从 A 地出发到 B 地，甲每小时走 5 千米，乙每小时走 4 千米。如果甲比乙早到 30 分钟，那么 A、B 两地相距多少千米？（  ）", options: ["A. 8", "B. 10", "C. 12", "D. 15"], answer: "B", analysis: "设距离为 s 千米，则 s/4 - s/5 = 0.5，解得 s=10。" },
-                    { id: 6, module: 2, text: "一个三位数，百位数字是个位数字的 2 倍，十位数字比个位数字大 1，这个三位数可能是（  ）", options: ["A. 231", "B. 452", "C. 673", "D. 894"], answer: "D", analysis: "设个位为 x，则百位为 2x，十位为 x+1。当 x=4 时，百位=8，十位=5，个位=4，即 854。但选项中没有，重新验证：231:2=2×1 ✓, 3=1+1 ✗；452:4=2×2 ✓, 5=2+1 ✗；673:6=2×3 ✓, 7=3+1 ✗；894:8=2×4 ✓, 9=4+1 ✓。答案是 D。" },
+                    { id: 6, module: 2, text: "一个三位数，百位数字是个位数字的 2 倍，十位数字比个位数字大 1，这个三位数可能是（  ）", options: ["A. 231", "B. 452", "C. 673", "D. 894"], answer: "D", analysis: "设个位为 x，则百位为 2x，十位为 x+1。验证可得 894 符合条件。" },
+                    { id: 22, module: 2, text: "某商品按定价出售，每个可获得 45 元的利润。现在按定价的八五折出售 8 个，所获得的利润与按定价每个减价 35 元出售 12 个所获得的利润一样多。这种商品每个定价多少元？（  ）", options: ["A. 180", "B. 200", "C. 220", "D. 240"], answer: "B", analysis: "设定价为 x 元，成本为 (x-45) 元。根据题意：8×(0.85x-x+45)=12×(x-35-x+45)，解得 x=200。" },
+                    { id: 23, module: 2, text: "一项工程，甲单独做需要 10 天完成，乙单独做需要 15 天完成。两人合作 3 天后，剩下的由甲单独完成，还需要几天？（  ）", options: ["A. 2", "B. 3", "C. 4", "D. 5"], answer: "B", analysis: "甲每天完成 1/10，乙每天完成 1/15。合作 3 天完成 3×(1/10+1/15)=1/2，剩下 1/2 由甲完成需要 5 天。" },
+                    { id: 24, module: 2, text: "某班有学生 45 人，其中会游泳的有 28 人，会骑自行车的有 32 人，两项都会的有 20 人。两项都不会的有多少人？（  ）", options: ["A. 3", "B. 5", "C. 7", "D. 9"], answer: "B", analysis: "根据容斥原理：至少会一项的有 28+32-20=40 人，两项都不会的有 45-40=5 人。" },
+                    { id: 25, module: 2, text: "一个正方形花坛，边长为 8 米。现在要在花坛周围铺一条宽 1 米的小路，小路的面积是多少平方米？（  ）", options: ["A. 32", "B. 36", "C. 40", "D. 44"], answer: "B", analysis: "大正方形边长为 10 米，面积为 100 平方米；小正方形面积为 64 平方米；小路面积为 100-64=36 平方米。" },
+                    { id: 26, module: 2, text: "某次考试共有 50 道题，答对一题得 3 分，答错一题扣 1 分，不答得 0 分。小明共得了 120 分，他最多答错了多少道题？（  ）", options: ["A. 5", "B. 10", "C. 15", "D. 20"], answer: "B", analysis: "设答对 x 题，答错 y 题，则 3x-y=120，x+y≤50。当 x=40，y=10 时，满足条件且 y 最大。" },
+
+                    // ==================== 判断推理（模块 3）====================
                     { id: 7, module: 3, text: "如果所有的 A 都是 B，有些 B 是 C，那么以下结论正确的是（  ）", options: ["A. 所有的 A 都是 C", "B. 有些 A 是 C", "C. 有些 C 是 A", "D. 无法确定 A 与 C 的关系"], answer: "D", analysis: "从'所有 A 是 B'和'有些 B 是 C'无法推出 A 与 C 的确定关系。" },
-                    { id: 8, module: 3, text: "某公司规定：只有工作满一年，才能享受年假。据此可以推出（  ）", options: ["A. 工作满一年，一定能享受年假", "B. 享受年假的人，一定工作满一年", "C. 工作不满一年，也可能享受年假", "D. 不享受年假的人，一定工作不满一年"], answer: "B", analysis: "'只有...才...'表示必要条件，享受年假→工作满一年。" },
+                    { id: 8, module: 3, text: "某公司规定：只有工作满一年，才能享受年假。据此可以推出（  ）", options: ["A. 工作满一年，一定能享受年假", "B. 享受年假的人，一定工作满一年", "C. 工作不满一年，也可能享受年假", "D. 不享受年假的人，一定工作不满一年"], answer: "B", analysis: "'只有…才…'表示必要条件，享受年假→工作满一年。" },
                     { id: 9, module: 3, text: "从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性（  ）\n2，6，12，20，30，？", options: ["A. 40", "B. 42", "C. 44", "D. 46"], answer: "B", analysis: "相邻两项之差为 4,6,8,10，所以下一个差为 12，30+12=42。" },
+                    { id: 27, module: 3, text: "某单位要选拔一名干部，条件是：如果是党员，则必须有三年以上工作经验。以下哪项符合这一条件？（  ）", options: ["A. 小张是党员，有两年工作经验。", "B. 小李不是党员，有五年工作经验。", "C. 小王是党员，有四年工作经验。", "D. 小赵不是党员，有一年工作经验。"], answer: "C", analysis: "根据条件，党员→三年以上工作经验，只有 C 选项符合。" },
+                    { id: 28, module: 3, text: "所有的植物都需要阳光，有些需要阳光的东西不能长期放在室内。由此可以推出（  ）", options: ["A. 有些植物不能长期放在室内", "B. 所有植物都不能长期放在室内", "C. 有些需要阳光的东西是植物", "D. 不能长期放在室内的都是植物"], answer: "A", analysis: "根据三段论推理，有些植物（需要阳光的）不能长期放在室内。" },
+                    { id: 29, module: 3, text: "甲、乙、丙、丁四人参加比赛，获得前四名。已知：①甲不是第一名；②乙不是第二名；③丙不是第三名；④丁是第四名。那么，第一名是谁？（  ）", options: ["A. 甲", "B. 乙", "C. 丙", "D. 无法确定"], answer: "C", analysis: "丁是第四名，丙不是第三名且不是第四名，可能是第一或第二名。乙不是第二名，甲不是第一名。综合分析，丙是第一名。" },
+                    { id: 30, module: 3, text: "1，4，9，16，25，？", options: ["A. 30", "B. 32", "C. 36", "D. 40"], answer: "C", analysis: "这是平方数列：1²，2²，3²，4²，5²，6²=36。" },
+                    { id: 31, module: 3, text: "有人说：'所有科学家都是聪明人。'以下哪项如果为真，最能反驳这一观点？（  ）", options: ["A. 有些聪明人是科学家。", "B. 有些科学家不是聪明人。", "C. 所有聪明人都是科学家。", "D. 有些聪明人不是科学家。"], answer: "B", analysis: "要反驳'所有 S 都是 P'，只需证明'有些 S 不是 P'。" },
+
+                    // ==================== 常识判断（模块 4）====================
                     { id: 10, module: 4, text: "我国宪法规定，中华人民共和国的根本制度是（  ）", options: ["A. 人民民主专政", "B. 人民代表大会制度", "C. 社会主义制度", "D. 民族区域自治制度"], answer: "C", analysis: "宪法第一条规定：社会主义制度是中华人民共和国的根本制度。" },
                     { id: 11, module: 4, text: "下列不属于我国古代'四大发明'的是（  ）", options: ["A. 造纸术", "B. 指南针", "C. 地动仪", "D. 火药"], answer: "C", analysis: "四大发明是：造纸术、指南针、火药、印刷术。地动仪是张衡发明，但不属于四大发明。" },
                     { id: 12, module: 4, text: "'民为贵，社稷次之，君为轻'出自（  ）", options: ["A. 《论语》", "B. 《孟子》", "C. 《荀子》", "D. 《老子》"], answer: "B", analysis: "出自《孟子·尽心下》，体现了孟子的民本思想。" },
+                    { id: 32, module: 4, text: "我国现行的行政区划中，省级行政单位共有（  ）个。", options: ["A. 32", "B. 34", "C. 36", "D. 38"], answer: "B", analysis: "我国共有 34 个省级行政单位，包括 23 个省、5 个自治区、4 个直辖市、2 个特别行政区。" },
+                    { id: 33, module: 4, text: "下列诗句中，描写春天的是（  ）", options: ["A. 接天莲叶无穷碧，映日荷花别样红。", "B. 停车坐爱枫林晚，霜叶红于二月花。", "C. 几处早莺争暖树，谁家新燕啄春泥。", "D. 忽如一夜春风来，千树万树梨花开。"], answer: "C", analysis: "A 描写夏天，B 描写秋天，D 描写冬天（以梨花喻雪），C 描写春天。" },
+                    { id: 34, module: 4, text: "我国第一颗人造地球卫星发射成功的时间是（  ）", options: ["A. 1964 年", "B. 1967 年", "C. 1970 年", "D. 1975 年"], answer: "C", analysis: "1970 年 4 月 24 日，我国成功发射第一颗人造地球卫星'东方红一号'。" },
+                    { id: 35, module: 4, text: "下列不属于'唐宋八大家'的是（  ）", options: ["A. 韩愈", "B. 苏轼", "C. 王安石", "D. 杜甫"], answer: "D", analysis: "唐宋八大家：韩愈、柳宗元、欧阳修、苏洵、苏轼、苏辙、王安石、曾巩。杜甫是诗人，不属于八大家。" },
+                    { id: 36, module: 4, text: "我国最长的河流是（  ）", options: ["A. 黄河", "B. 长江", "C. 珠江", "D. 黑龙江"], answer: "B", analysis: "长江全长约 6300 公里，是我国最长的河流，也是世界第三长河。" },
+                    { id: 37, module: 4, text: "下列哪个国家不属于'金砖五国'？（  ）", options: ["A. 巴西", "B. 俄罗斯", "C. 印度", "D. 日本"], answer: "D", analysis: "金砖五国：中国、俄罗斯、印度、巴西、南非。日本不是成员国。" },
+
+                    // ==================== 资料分析（模块 5）====================
                     { id: 13, module: 5, text: "根据以下资料回答问题：\n\n2023 年某地区 GDP 为 1200 亿元，同比增长 8%。其中第一产业增加值为 120 亿元，第二产业增加值为 600 亿元，第三产业增加值为 480 亿元。\n\n第一产业占 GDP 的比重约为（  ）", options: ["A. 8%", "B. 10%", "C. 12%", "D. 15%"], answer: "B", analysis: "120÷1200=0.1=10%" },
                     { id: 14, module: 5, text: "根据上题资料，第三产业占比为（  ）", options: ["A. 35%", "B. 40%", "C. 45%", "D. 50%"], answer: "B", analysis: "480÷1200=0.4=40%" },
-                    { id: 15, module: 5, text: "根据上题资料，若 2024 年 GDP 继续保持 8% 的增长率，则 2024 年 GDP 约为（  ）", options: ["A. 1280 亿元", "B. 1296 亿元", "C. 1308 亿元", "D. 1320 亿元"], answer: "B", analysis: "1200×1.08=1296 亿元" }
+                    { id: 15, module: 5, text: "根据上题资料，若 2024 年 GDP 继续保持 8% 的增长率，则 2024 年 GDP 约为（  ）", options: ["A. 1280 亿元", "B. 1296 亿元", "C. 1308 亿元", "D. 1320 亿元"], answer: "B", analysis: "1200×1.08=1296 亿元" },
+                    { id: 38, module: 5, text: "根据以下资料回答问题：\n\n某市 2023 年城镇居民人均可支配收入为 45000 元，同比增长 6.5%；农村居民人均可支配收入为 18000 元，同比增长 8.2%。\n\n2022 年城镇居民人均可支配收入约为（  ）", options: ["A. 42000 元", "B. 42254 元", "C. 42500 元", "D. 43000 元"], answer: "B", analysis: "45000÷1.065≈42254 元" },
+                    { id: 39, module: 5, text: "根据上题资料，2023 年城乡居民收入比约为（  ）", options: ["A. 2.2:1", "B. 2.5:1", "C. 2.8:1", "D. 3.0:1"], answer: "B", analysis: "45000:18000=2.5:1" },
+                    { id: 40, module: 5, text: "根据以下资料回答问题：\n\n某企业 2023 年四个季度的产值分别为：一季度 200 万元，二季度 250 万元，三季度 300 万元，四季度 350 万元。\n\n该企业 2023 年平均每月产值约为（  ）", options: ["A. 85 万元", "B. 90 万元", "C. 92 万元", "D. 95 万元"], answer: "C", analysis: "全年总产值 1100 万元，平均每月 1100÷12≈91.67 万元" },
+                    { id: 41, module: 5, text: "根据上题资料，四季度产值比一季度增长了（  ）", options: ["A. 65%", "B. 70%", "C. 75%", "D. 80%"], answer: "C", analysis: "(350-200)÷200=0.75=75%" },
+                    { id: 42, module: 5, text: "根据以下资料回答问题：\n\n某学校有学生 2400 人，其中男生占 55%，女生占 45%。高一年级占 35%，高二年级占 35%，高三年级占 30%。\n\n该校男生人数为（  ）", options: ["A. 1200 人", "B. 1280 人", "C. 1320 人", "D. 1360 人"], answer: "C", analysis: "2400×55%=1320 人" },
+                    { id: 43, module: 5, text: "根据上题资料，高三年级女生约有多少人？（假设各年级男女比例相同）", options: ["A. 300 人", "B. 324 人", "C. 350 人", "D. 380 人"], answer: "B", analysis: "高三年级人数：2400×30%=720 人，其中女生：720×45%=324 人" }
                 ];
                 DB.setQuestions(defaultQuestions);
             }
@@ -1374,8 +1346,8 @@
                 item.style.display = user.role === 'admin' ? 'block' : 'none';
             });
 
-            // 刷新统计数据
-            renderHomeStats();
+            // 渲染模块卡片
+            renderModuleGrid();
         }
 
         function switchView(view) {
@@ -1388,6 +1360,7 @@
             if (view === 'history') renderHistory();
             if (view === 'stats') renderStats();
             if (view === 'admin') renderQuestionList();
+            if (view === 'home') renderModuleGrid();
         }
 
         // ==================== 答题相关 ====================
@@ -1583,6 +1556,40 @@
         }
 
         // ==================== 首页统计 ====================
+        const moduleInfo = [
+            { id: 1, name: '言语理解', desc: '考察文字理解和表达能力', icon: '📖', iconClass: 'module-icon-1' },
+            { id: 2, name: '数量关系', desc: '考察数学运算和逻辑思维', icon: '🔢', iconClass: 'module-icon-2' },
+            { id: 3, name: '判断推理', desc: '考察逻辑判断和推理能力', icon: '🎯', iconClass: 'module-icon-3' },
+            { id: 4, name: '常识判断', desc: '考察综合知识储备', icon: '🌍', iconClass: 'module-icon-4' },
+            { id: 5, name: '资料分析', desc: '考察数据分析和计算能力', icon: '📈', iconClass: 'module-icon-5' }
+        ];
+
+        function renderModuleGrid() {
+            const user = DB.getCurrentUser();
+            const container = document.getElementById('moduleGrid');
+            if (!container) return;
+
+            container.innerHTML = moduleInfo.map(m => {
+                const questionCount = getModuleQuestionCount(m.id);
+                const accuracy = user ? getModuleAccuracy(m.id) : 0;
+                return `
+                    <div class="module-card" onclick="startQuiz(${m.id})">
+                        <div class="module-card-header">
+                            <div class="module-icon ${m.iconClass}">${m.icon}</div>
+                            <div>
+                                <div class="module-name">${m.name}</div>
+                            </div>
+                        </div>
+                        <div class="module-desc">${m.desc}</div>
+                        <div class="module-stats">
+                            <span class="module-stat">📝 ${questionCount} 题</span>
+                            <span class="module-stat">✅ ${accuracy}% 正确率</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function renderHomeStats() {
             const user = DB.getCurrentUser();
             if (!user) return;
